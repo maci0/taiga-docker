@@ -27,9 +27,6 @@ taigaback:
     EMAIL_HOST_PASSWORD: yourpassword
   links:
     - db:postgres
-    - events
-    - rabbit
-    - redis
   volumes_from:
     - data
   restart: always
@@ -44,20 +41,3 @@ taigafront:
   ports:
     - 0.0.0.0:80:80
   restart: always
-  
-rabbit:
-  image: rabbitmq:3
-  hostname: taiga-rabbit
-
-redis:
-  image: redis:3
-
-celery:
-  image: celery
-  links:
-    - rabbit
-
-events:
-  image: benhutchins/taiga-events
-  links:
-    - rabbit
