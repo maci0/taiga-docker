@@ -24,6 +24,11 @@ RUN \
 # Add Taiga Configuration
 ADD ./local.py /usr/local/taiga/taiga-back/settings/local.py
 
+# Install LDAP Plugin
+RUN pip install --no-cache-dir \
+      taiga-contrib-ldap-auth
+
+
 # Configure and Start scripts
 ADD ./configure /usr/local/taiga/configure
 ADD ./start /usr/local/taiga/start
