@@ -5,6 +5,7 @@ data:
     - /usr/local/taiga/media
     - /usr/local/taiga/static
     - /usr/local/taiga/logs
+  restart: always
 db:
   image: postgres
   environment:
@@ -12,6 +13,7 @@ db:
     POSTGRES_PASSWORD: password
   volumes_from:
     - data
+  restart: always
 taigaback:
   image: htdvisser/taiga-back
   hostname: dev.example.com
@@ -26,6 +28,7 @@ taigaback:
     - db:postgres
   volumes_from:
     - data
+  restart: always
 taigafront:
   image: htdvisser/taiga-front-dist
   hostname: dev.example.com
@@ -35,3 +38,4 @@ taigafront:
     - data
   ports:
     - 0.0.0.0:80:80
+  restart: always
