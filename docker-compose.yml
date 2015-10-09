@@ -6,6 +6,7 @@ data:
     - /usr/local/taiga/static
     - /usr/local/taiga/logs
   restart: always
+  
 db:
   image: postgres
   environment:
@@ -14,6 +15,7 @@ db:
   volumes_from:
     - data
   restart: always
+  
 taigaback:
   image: htdvisser/taiga-back
   hostname: dev.example.com
@@ -26,9 +28,13 @@ taigaback:
     EMAIL_HOST_PASSWORD: yourpassword
   links:
     - db:postgres
+    - events
+    - rabbit
+    - redis
   volumes_from:
     - data
   restart: always
+  
 taigafront:
   image: htdvisser/taiga-front-dist
   hostname: dev.example.com
@@ -39,3 +45,20 @@ taigafront:
   ports:
     - 0.0.0.0:80:80
   restart: always
+  
+rabbit:
+  image: rabbitmq:3
+  hostname: taiga-rabbit
+
+redis:
+  image: redis:3
+
+celery:
+  image: celery
+  links:
+    - rabbit
+
+events:
+  image: benhutchins/taiga-events
+  links:
+    - rabbit
