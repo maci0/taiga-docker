@@ -5,8 +5,7 @@ data:
     - /usr/local/taiga/media
     - /usr/local/taiga/static
     - /usr/local/taiga/logs
-  restart: always
-  
+
 db:
   image: postgres
   environment:
