@@ -35,7 +35,7 @@ taigaback:
   restart: always
   
 taigafront:
-  image: htdvisser/taiga-front-dist
+  build: taiga-front-dist
   hostname: dev.example.com
   links:
     - taigaback
