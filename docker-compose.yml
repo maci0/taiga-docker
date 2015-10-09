@@ -17,7 +17,7 @@ db:
   restart: always
   
 taigaback:
-  image: htdvisser/taiga-back
+  build: taiga-back
   hostname: dev.example.com
   environment:
     SECRET_KEY: examplesecretkey
